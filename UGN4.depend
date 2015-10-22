@@ -1,0 +1,614 @@
+# depslib dependency file v1.0
+1444409252 source:l:\programming\c++\programs\ugn4\main.cpp
+	"MasterControl.h"
+	<SDL.h>
+	<math.h>
+	<iostream>
+
+1444418224 source:l:\programming\c++\programs\ugn4\src\renderer.cpp
+	<iostream>
+	<string>
+	<stdio.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<vector>
+	"Renderer.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1433808236 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\begin_code.h
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\close_code.h
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944396 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1394944398 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1376163542 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1444418224 l:\programming\c++\programs\ugn4\include\renderer.h
+	<vector>
+	<string>
+	<SDL.h>
+	"Renderable.h"
+	"Sprite.h"
+	"AnimatedSprite.h"
+	"Particle.h"
+
+1444120202 source:l:\programming\c++\programs\ugn4\src\sprite.cpp
+	<iostream>
+	<stdio.h>
+	<SDL.h>
+	<SDL_image.h>
+	"Sprite.h"
+
+1441240802 l:\programming\c++\programs\ugn4\include\sprite.h
+	"Renderable.h"
+
+1444274998 source:l:\programming\c++\programs\ugn4\src\renderable.cpp
+	<iostream>
+	<stdio.h>
+	<SDL.h>
+	<SDL_image.h>
+	"Renderable.h"
+
+1444119790 l:\programming\c++\programs\ugn4\include\renderable.h
+	"Vector2.h"
+	<SDL.h>
+
+1442834142 l:\programming\c++\programs\ugn4\include\vector2.h
+
+1440462272 source:l:\programming\c++\programs\ugn4\src\vector2.cpp
+	"Vector2.h"
+
+1444119914 source:l:\programming\c++\programs\ugn4\src\character.cpp
+	<SDL.h>
+	<string>
+	<math.h>
+	"Character.h"
+	"AnimatedSprite.h"
+	"Interface.h"
+
+1443087580 l:\programming\c++\programs\ugn4\include\character.h
+	<string>
+	<vector>
+	"AnimatedSprite.h"
+	"Vector2.h"
+	"Collidable.h"
+	"Identification.h"
+	"Timer.h"
+	"Item.h"
+
+1444119892 source:l:\programming\c++\programs\ugn4\src\animatedsprite.cpp
+	<SDL.h>
+	"AnimatedSprite.h"
+
+1443899700 l:\programming\c++\programs\ugn4\include\animatedsprite.h
+	"Sprite.h"
+	"Timer.h"
+
+1444151750 source:l:\programming\c++\programs\ugn4\src\fireball.cpp
+	<windows.h>
+	<SDL.h>
+	<iostream>
+	"FireBall.h"
+
+1443085974 l:\programming\c++\programs\ugn4\include\fireball.h
+	<cmath>
+	<iostream>
+	"Sprite.h"
+	"ParticleEmitter.h"
+	"Spell.h"
+	"Collidable.h"
+	"Character.h"
+	"Timer.h"
+
+1442670784 l:\programming\c++\programs\ugn4\include\particle.h
+	"Vector2.h"
+	"Timer.h"
+
+1444120088 source:l:\programming\c++\programs\ugn4\src\particle.cpp
+	<SDL.h>
+	"Particle.h"
+	"Vector2.h"
+
+1443085974 source:l:\programming\c++\programs\ugn4\src\particleemitter.cpp
+	<stdlib.h>
+	<math.h>
+	<iostream>
+	"ParticleEmitter.h"
+
+1444119740 l:\programming\c++\programs\ugn4\include\particleemitter.h
+	<vector>
+	<SDL.h>
+	"Particle.h"
+	"Timer.h"
+
+1444418224 source:l:\programming\c++\programs\ugn4\src\interface.cpp
+	<SDL.h>
+	<windows.h>
+	<iostream>
+	<string>
+	"Interface.h"
+
+1444418224 l:\programming\c++\programs\ugn4\include\interface.h
+	<vector>
+	"Renderable.h"
+	"AnimatedSprite.h"
+	"FireBall.h"
+	"Sprite.h"
+	"Character.h"
+	"Renderer.h"
+	"Spell.h"
+	"MapChunk.h"
+	"DamageNumber.h"
+
+1444418224 source:l:\programming\c++\programs\ugn4\src\gameengine.cpp
+	<SDL.h>
+	<windows.h>
+	<iostream>
+	<typeinfo>
+	"GameEngine.h"
+	"MasterControl.h"
+
+1444235486 l:\programming\c++\programs\ugn4\include\gameengine.h
+	"GameState.h"
+	"Interface.h"
+	"Renderer.h"
+	"Options.h"
+	"Timer.h"
+	"UserInterface.h"
+	"MainMenu.h"
+
+1438843710 source:l:\programming\c++\programs\ugn4\src\options.cpp
+	"Options.h"
+
+1444119750 l:\programming\c++\programs\ugn4\include\options.h
+	<SDL.h>
+	"Vector2.h"
+
+1439153158 source:l:\programming\c++\programs\ugn4\src\spell.cpp
+	"Spell.h"
+
+1444119712 l:\programming\c++\programs\ugn4\include\spell.h
+	<SDL.h>
+	<iostream>
+	"Character.h"
+	"AnimatedSprite.h"
+	"Sprite.h"
+	"Particle.h"
+
+1443083958 l:\programming\c++\programs\ugn4\include\mapchunk.h
+	<vector>
+	"Sprite.h"
+	"Renderer.h"
+
+1444120028 source:l:\programming\c++\programs\ugn4\src\mapchunk.cpp
+	<SDL.h>
+	<string>
+	<iostream>
+	"MapChunk.h"
+
+1444409252 l:\programming\c++\programs\ugn4\include\collidable.h
+	<SDL.h>
+	<vector>
+
+1444155600 source:l:\programming\c++\programs\ugn4\src\collidable.cpp
+	"Collidable.h"
+	"Identification.h"
+	<iostream>
+
+1439666470 l:\programming\c++\programs\ugn4\include\damagenumber.h
+	"Renderable.h"
+	"Timer.h"
+
+1444119938 source:l:\programming\c++\programs\ugn4\src\damagenumber.cpp
+	"DamageNumber.h"
+	<stdlib.h>
+	<math.h>
+	<string>
+	<SDL.h>
+	<SDL_ttf.h>
+
+1376163744 l:\programming\c++\sdl2-2.0.3\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1444120202 source:l:\programming\c++\programs\ugn4\src\timer.cpp
+	"Timer.h"
+	<SDL.h>
+	<iostream>
+
+1443867516 l:\programming\c++\programs\ugn4\include\timer.h
+
+1439749632 source:l:\programming\c++\programs\ugn4\src\identification.cpp
+	"Identification.h"
+
+1439690074 l:\programming\c++\programs\ugn4\include\identification.h
+
+1442530694 source:l:\programming\c++\programs\ugn4\src\item.cpp
+	"Item.h"
+
+1442530694 l:\programming\c++\programs\ugn4\include\item.h
+	"Renderable.h"
+
+1444418778 source:l:\programming\c++\programs\ugn4\src\userinterface.cpp
+	"UserInterface.h"
+	"Options.h"
+	<iostream>
+
+1443087148 l:\programming\c++\programs\ugn4\include\userinterface.h
+	<vector>
+	"Interface.h"
+	"Options.h"
+	"Vector2.h"
+	"Sprite.h"
+	"Character.h"
+	"Button.h"
+
+1444276402 source:l:\programming\c++\programs\ugn4\src\button.cpp
+	"Button.h"
+
+1443082732 l:\programming\c++\programs\ugn4\include\button.h
+	<vector>
+	"Sprite.h"
+
+1444409252 source:l:\programming\c++\programs\ugn4\src\meleeattack.cpp
+	"Character.h"
+	"MeleeAttack.h"
+
+1444418298 l:\programming\c++\programs\ugn4\include\meleeattack.h
+	"SDL.h"
+	"Collidable.h"
+	"Item.h"
+	"AnimatedSprite.h"
+
+1442771718 source:l:\programming\c++\programs\ugn4\src\test.cpp
+	"Test.h"
+
+1442773908 l:\programming\c++\programs\ugn4\include\test.h
+	<vector>
+
+1444254930 l:\programming\c++\programs\ugn4\include\mainmenu.h
+	<vector>
+	<SDL.h>
+	"GameState.h"
+	"Button.h"
+	"Renderer.h"
+	"Sprite.h"
+
+1444418624 source:l:\programming\c++\programs\ugn4\src\mainmenu.cpp
+	"MainMenu.h"
+	"GameEngine.h"
+	"MasterControl.h"
+
+1444234284 l:\programming\c++\programs\ugn4\include\gamestate.h
+
+1444235532 source:l:\programming\c++\programs\ugn4\src\mastercontrol.cpp
+	"MasterControl.h"
+
+1444235286 l:\programming\c++\programs\ugn4\include\mastercontrol.h
+	<vector>
+	"GameState.h"
+	"GameEngine.h"
+	"MainMenu.h"
+
+1444410530 source:l:\programming\c++\programs\ugn4\src\mslash.cpp
+	"MSlash.h"
+
+1444418374 l:\programming\c++\programs\ugn4\include\mslash.h
+	"MeleeAttack.h"
+

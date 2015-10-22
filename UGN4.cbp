@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="UNG4" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/UGN4" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add directory="C:/MinGW/include/SDL2" />
+		</Compiler>
+		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf" />
+			<Add directory="C:/Program Files (x86)/CodeBlocks/MinGW/lib" />
+		</Linker>
+		<Unit filename="include/AnimatedSprite.h" />
+		<Unit filename="include/Button.h" />
+		<Unit filename="include/Character.h" />
+		<Unit filename="include/Collidable.h" />
+		<Unit filename="include/DamageNumber.h" />
+		<Unit filename="include/FireBall.h" />
+		<Unit filename="include/GameEngine.h" />
+		<Unit filename="include/GameState.h" />
+		<Unit filename="include/Identification.h" />
+		<Unit filename="include/Interface.h" />
+		<Unit filename="include/Item.h" />
+		<Unit filename="include/MSlash.h" />
+		<Unit filename="include/MainMenu.h" />
+		<Unit filename="include/MapChunk.h" />
+		<Unit filename="include/MasterControl.h" />
+		<Unit filename="include/MeleeAttack.h" />
+		<Unit filename="include/Options.h" />
+		<Unit filename="include/Particle.h" />
+		<Unit filename="include/ParticleEmitter.h" />
+		<Unit filename="include/Renderable.h" />
+		<Unit filename="include/Renderer.h" />
+		<Unit filename="include/Spell.h" />
+		<Unit filename="include/Sprite.h" />
+		<Unit filename="include/Timer.h" />
+		<Unit filename="include/UserInterface.h" />
+		<Unit filename="include/Vector2.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/AnimatedSprite.cpp" />
+		<Unit filename="src/Button.cpp" />
+		<Unit filename="src/Character.cpp" />
+		<Unit filename="src/Collidable.cpp" />
+		<Unit filename="src/DamageNumber.cpp" />
+		<Unit filename="src/FireBall.cpp" />
+		<Unit filename="src/GameEngine.cpp" />
+		<Unit filename="src/Identification.cpp" />
+		<Unit filename="src/Interface.cpp" />
+		<Unit filename="src/Item.cpp" />
+		<Unit filename="src/MSlash.cpp" />
+		<Unit filename="src/MainMenu.cpp" />
+		<Unit filename="src/MapChunk.cpp" />
+		<Unit filename="src/MasterControl.cpp" />
+		<Unit filename="src/MeleeAttack.cpp" />
+		<Unit filename="src/Options.cpp" />
+		<Unit filename="src/Particle.cpp" />
+		<Unit filename="src/ParticleEmitter.cpp" />
+		<Unit filename="src/Renderable.cpp" />
+		<Unit filename="src/Renderer.cpp" />
+		<Unit filename="src/Sprite.cpp" />
+		<Unit filename="src/Timer.cpp" />
+		<Unit filename="src/UserInterface.cpp" />
+		<Unit filename="src/Vector2.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
