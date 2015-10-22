@@ -3,26 +3,24 @@
 #include "AnimatedSprite.h"
 
 AnimatedSprite::AnimatedSprite(SDL_Texture* AnimatedTexture, float X, float Y, int TexX, int TexY, int Row, int Column, int FrameHeight, int FrameWidth, int Delay,
-            int TotalFrames, bool Loop, bool HoldLast) : TextureX(TexX), TextureY(TexY), Rows(Row), Columns(Column),
-            Height(FrameHeight), Width(FrameWidth), FrameDelay(Delay), MaxFrames(TotalFrames), Looping(Loop), Holding(HoldLast),
-            Sprite(AnimatedTexture, X, Y){
+            int TotalFrames, bool Loop, bool HoldLast) : Sprite(AnimatedTexture, X, Y), TextureX(TexX), TextureY(TexY), Rows(Row), Columns(Column),
+            Height(FrameHeight), Width(FrameWidth), MaxFrames(TotalFrames), AnimationTimer(Delay), Looping(Loop), Holding(HoldLast){
     ClipingRect.x = TexX;
     ClipingRect.y = TexY;
     ClipingRect.h = FrameHeight;
     ClipingRect.w = FrameWidth;
     DestinationRect.h = FrameHeight;
     DestinationRect.w = FrameWidth;
-    StartTime = SDL_GetTicks();
-    LogicalDelay = Delay;
     Frame = 1;
+    Origin.x = FrameWidth / 2;
+    Origin.y = FrameHeight / 2;
 }
 AnimatedSprite::~AnimatedSprite(){
 
 }
 
 void AnimatedSprite::Update(){
-    if (SDL_GetTicks() - StartTime > LogicalDelay && !Paused){
-        LogicalDelay += FrameDelay;
+    if (AnimationTimer.IsTime()){
         ClipingRect.x = (Frame % Columns * Width) + TextureX;
         ClipingRect.y = (Frame % Rows * Height) + TextureY;
         if (Holding && Frame == MaxFrames)
@@ -35,16 +33,15 @@ void AnimatedSprite::Update(){
         }
     }
 }
+
 void AnimatedSprite::Pause(){
-    Paused = true;
+    AnimationTimer.Pause();
 }
 void AnimatedSprite::Resume(bool Restart){
-    Paused = false;
+    AnimationTimer.Resume();
     if (Restart)
         Reset();
 }
 void AnimatedSprite::Reset(){
-    StartTime = SDL_GetTicks();
-    LogicalDelay = FrameDelay;
     Frame = 1;
 }

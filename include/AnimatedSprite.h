@@ -2,6 +2,7 @@
 #define ANIMATEDSPRITE_H
 
 #include "Sprite.h"
+#include "Timer.h"
 
 class AnimatedSprite : public Sprite{
     public:
@@ -14,11 +15,11 @@ class AnimatedSprite : public Sprite{
         void Resume(bool Restart = false);
 
     protected:
+        int TextureX, TextureY;
         int Rows, Columns;
         int Height, Width;
         int Frame, MaxFrames;
-        int FrameDelay, LogicalDelay, StartTime;
-        bool Looping, Holding, Paused;
-        int TextureX, TextureY;
+        Timer AnimationTimer;
+        bool Looping, Holding;
 };
 #endif // ANIMATEDSPRITE_H

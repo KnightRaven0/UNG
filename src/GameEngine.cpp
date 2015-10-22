@@ -1,209 +1,242 @@
 #include <SDL.h>
 #include <windows.h>
 #include <iostream>
+#include <typeinfo>
 
 #include "GameEngine.h"
+#include "MasterControl.h"
 
-GameEngine::GameEngine():Render("Un-Named Game", 30, 30 , 1280, 720), _Interface(&Render){
-    Running = true;
+GameEngine::GameEngine(Renderer* RenderEngine): Inter(RenderEngine), UI(&Inter), CollisionTimer(16), RenderTimer(10), MovementTimer(1){
+    Render = RenderEngine;
+    W = false;
+    S = false;
+    A = false;
+    D = false;
+    Timer::InitializeTime();
+    Timer::SetGameSpeed(1);
+    Timer::UnpauseGame();
+    Inter.CreatePlayableCharacter(100, 100);
+    Inter.CreateCharacter(400, 100);
 }
-GameEngine::~GameEngine(){
-    Render.~Renderer();
+void GameEngine::Pause(){
+    Timer::PauseGame();
 }
-void GameEngine::Update(){
-    int Size = _Interface.GetAllFireBalls().size();
+void GameEngine::Resume(){
+    Timer::UnpauseGame();
+}
+void GameEngine::Update(MasterControl* Control){
+    Timer::Update();
+    HandleEvents(Control);
+    UpdateObjects();
+    if (CollisionTimer.IsTime()){
+        CollisionDetection();
+    }
+    if (RenderTimer.IsTime()){
+        Draw();
+    }
+}
+void GameEngine::CollisionDetection(){
+    std::vector<Collidable*> Collides = Inter.GetCollidables();
+    for (int c = 0; c < Collides.size(); c++){
+        for (int cc = c + 1; cc < Collides.size(); cc++){
+            SDL_Rect* FirstDest = Collides[c]->GetCollisionRect();
+            SDL_Rect* SecondDest = Collides[cc]->GetCollisionRect();
+            bool Collision = true;
+            if (FirstDest->x + FirstDest->w < SecondDest->x)
+                Collision = false;
+            else if (SecondDest->x + SecondDest->w < FirstDest->x)
+                Collision = false;
+            else if (FirstDest->y + FirstDest->h < SecondDest->y)
+                Collision = false;
+            else if (SecondDest->y + SecondDest->h < FirstDest->y)
+                Collision = false;
+            if (Collision){
+                Collidable& Ref1 = *Collides[c];
+                Collidable& Ref2 = *Collides[cc];
+                if (dynamic_cast<Identification*>(&Ref1)){
+                    Collision = !Ref1.ShouldIgnore(Ref2);
+                }
+                if (dynamic_cast<Identification*>(&Ref1) && Collision){
+                    Collision = !Ref2.ShouldIgnore(Ref1);
+                }
+                if (Collision){
+                    if (dynamic_cast<Spell*>(&Ref1) != NULL){
+                        dynamic_cast<Spell*>(&Ref1)->SpellEffect(Ref2);
+                    }
+                    if (dynamic_cast<Spell*>(&Ref2) != NULL){
+                        dynamic_cast<Spell*>(&Ref2)->SpellEffect(Ref1);
+                    }
+                    Collides[c]->Collided();
+                    Collides[cc]->Collided();
+                }
+            }
+            delete[] FirstDest;
+            delete[] SecondDest;
+        }
+    }
+}
+void GameEngine::ForceCollisionCheck(Collidable* Collide){
+    std::vector<Collidable*> Collides = Inter.GetCollidables();
+    for (int c = 0; c < Collides.size(); c++){
+        SDL_Rect* FirstDest = Collide->GetCollisionRect();
+        SDL_Rect* SecondDest = Collides[c]->GetCollisionRect();
+        bool Collision = true;
+        if (FirstDest->x + FirstDest->w < SecondDest->x)
+            Collision = false;
+        else if (SecondDest->x + SecondDest->w < FirstDest->x)
+            Collision = false;
+        else if (FirstDest->y + FirstDest->h < SecondDest->y)
+            Collision = false;
+        else if (SecondDest->y + SecondDest->h < FirstDest->y)
+            Collision = false;
+        if (Collision){
+            Collidable& Ref1 = *Collide;
+            Collidable& Ref2 = *Collides[c];
+            if (dynamic_cast<Identification*>(&Ref1)){
+                Collision = !Ref1.ShouldIgnore(Ref2);
+            }
+            if (dynamic_cast<Identification*>(&Ref1) && Collision){
+                Collision = !Ref2.ShouldIgnore(Ref1);
+            }
+            if (Collision){
+                if (dynamic_cast<Spell*>(&Ref1) != NULL){
+                    dynamic_cast<Spell*>(&Ref1)->SpellEffect(Ref2);
+                }
+                if (dynamic_cast<Spell*>(&Ref2) != NULL){
+                    dynamic_cast<Spell*>(&Ref2)->SpellEffect(Ref1);
+                }
+                Collide->Collided();
+                Collides[c]->Collided();
+            }
+        }
+        delete[] FirstDest;
+        delete[] SecondDest;
+    }
+}
+void GameEngine::UpdateObjects(){
+    int Size = Inter.GetSpells().size();
+    for (int i = Size - 1; i >= 0; i--){
+        if (Inter.GetSpells()[i]->GetLife() <= 0){
+            Inter.PreserveParticles(Inter.GetSpells()[i]->GetParticles());
+            delete Inter.GetSpells()[i];
+            Inter.GetSpells().erase(Inter.GetSpells().begin() + i);
+        }else{
+            Inter.GetSpells()[i]->Update();
+        }
+    }
+    Size = Inter.GetPCs().size();
     for (int i = 0; i < Size; i++){
-        if (_Interface.GetAllFireBalls()[i].GetLife() <= 0){
-            _Interface.GetAllFireBalls().erase(_Interface.GetAllFireBalls().begin() + i);
+        Inter.GetPCs()[i].Update();
+    }
+    Size = Inter.GetNPCs().size();
+    for (int i = 0; i < Size; i++){
+        Inter.GetNPCs()[i].Update();
+    }
+    Size = Inter.GetStrayParticles().size();
+    for (int i = Size - 1; i >= 0; i--){
+        Inter.GetStrayParticles()[i].Update();
+        if (Inter.GetStrayParticles()[i].GetLife() <= 0)
+            Inter.GetStrayParticles().erase(Inter.GetStrayParticles().begin() + i);
+    }
+    Size = Inter.GetDamageNumbers().size();
+    for (int i = Size - 1; i >= 0; i--){
+        if (Inter.GetDamageNumbers()[i]->IsDead()){
+            delete Inter.GetDamageNumbers()[i];
+            Inter.GetDamageNumbers().erase(Inter.GetDamageNumbers().begin() + i);
         }else
-            _Interface.GetAllFireBalls()[i].Update();
+            Inter.GetDamageNumbers()[i]->Update();
     }
-    Size = _Interface.GetPCs().size();
-    for (int i = 0; i < Size; i++){
-        _Interface.GetPCs()[i].Update();
+    while (MovementTimer.IsTime()){
+        if (W)
+            Inter.GetPCs()[ActivePC].MoveForward(100);
+        if (S)
+            Inter.GetPCs()[ActivePC].MoveForward(-75);
+        if (D)
+            Inter.GetPCs()[ActivePC].Rotate(.2);
+        if (A)
+            Inter.GetPCs()[ActivePC].Rotate(-.2);
     }
-    RenderGame();
-    HandleEvents();
-    HandleMovement(NULL, NULL);
+    UI.Update(Inter.GetPCs()[ActivePC]);
 }
-void GameEngine::RenderGame(){
-    Render.RenderStart();
-    Render.RenderParticles(_Interface.GetAllParticles());
-    Render.RenderSprites(_Interface.GetAllSprites());
-    Render.RenderAnims(_Interface.GetAllAnims());
-    Render.RenderFinish();
+void GameEngine::Draw(){
+    Render->RenderStart();
+    Render->RenderSprites(Inter.GetMapSprites());
+    Render->RenderParticles(Inter.GetStrayParticles());
+    Render->RenderParticles(Inter.GetAllParticles());
+    Render->RenderSprites(Inter.GetAllSprites());
+    Render->RenderAbles(Inter.GetRenderables());
+    Render->RenderSprites(UI.GetUISprites());
+    Render->RenderFinish();
 }
-void GameEngine::HandleEvents(){
+void GameEngine::HandleEvents(MasterControl* Control){
+    UpdateAnim = false;
     bool PC = true;
-    if (_Interface.GetPCs().size() == 0)
+    if (Inter.GetPCs().size() == 0){
         PC = false;
-
-    static int CastTime = SDL_GetTicks();
+    }
+    static int CastTime;
     static bool Casting = false;
 
     SDL_Event Events;
     while(SDL_PollEvent(&Events)){
-        if (Events.type == SDL_QUIT || (Events.type == SDL_KEYDOWN && Events.key.keysym.sym == SDLK_ESCAPE)){   //Handle Escapes
-            Running = false;
+        if (Events.type == SDL_QUIT || (Events.type == SDL_KEYDOWN && Events.key.keysym.sym == SDLK_ESCAPE)){
+            Control->PopState();
         }
-
         if (Events.type == SDL_KEYDOWN){
-            if (Events.key.keysym.sym == SDLK_c && PC && !Casting){//Spell Cast
-                CastTime = SDL_GetTicks();
+            if (Events.key.keysym.sym == Option.CombatKeyCAST && PC && !Casting){
+                CastTime = Timer::GetTicks();
                 Casting = true;
             }
-            if (Events.key.keysym.sym == SDLK_w){
-                HandleMovement('w', true);
+            if (Events.key.keysym.sym == Option.MovementKeyUP){
+                if (!W){
+                    W = true;
+                    V = true;
+                }
             }
-            if (Events.key.keysym.sym == SDLK_s){
-                HandleMovement('s', true);
+            if (Events.key.keysym.sym == Option.MovementKeyDOWN){
+                if (!S){
+                    V = false;
+                    S = true;
+                }
             }
-            if (Events.key.keysym.sym == SDLK_a){
-                HandleMovement('a', true);
+            if (Events.key.keysym.sym == Option.MovementKeyLEFT){
+                if (!A){
+                    H = false;
+                    A = true;
+                }
             }
-            if (Events.key.keysym.sym == SDLK_d){
-                HandleMovement('d', true);
+            if (Events.key.keysym.sym == Option.MovementKeyRIGHT){
+                if (!D){
+                    H = true;
+                    D = true;
+                }
             }
         }
         if (Events.type == SDL_KEYUP){
-            if (Events.key.keysym.sym == SDLK_c && PC){//Spell Cast
+            if (Events.key.keysym.sym == Option.CombatKeyCAST && PC){
                 Casting = false;
-                _Interface.CreateFireBall(_Interface.GetPCs()[_Interface.ActivePC].GetAnimation().GetX() + _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().GetOrgin()->x,
-                                          _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().GetY() + _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().GetOrgin()->y,
-                10, 10, _Interface.GetPCs()[_Interface.ActivePC].GetAngle(), SDL_GetTicks() - CastTime);
+                Inter.CastSpell(&Inter.GetPCs()[ActivePC], Timer::GetTicks() - CastTime);
             }
-            if (Events.key.keysym.sym == SDLK_w){
-                HandleMovement('w', false);
+            if (Events.key.keysym.sym == Option.MovementKeyUP){
+                W = false;
+                if (V && S)
+                    V = false;
             }
-            if (Events.key.keysym.sym == SDLK_s){
-                HandleMovement('s', false);
+            if (Events.key.keysym.sym == Option.MovementKeyDOWN){
+                S = false;
+                if (!V && W)
+                    V = true;
             }
-            if (Events.key.keysym.sym == SDLK_a){
-                HandleMovement('a', false);
+            if (Events.key.keysym.sym == Option.MovementKeyLEFT){
+                A = false;
+                if (!H && D)
+                    H = true;
             }
-            if (Events.key.keysym.sym == SDLK_d){
-                HandleMovement('d', false);
+            if (Events.key.keysym.sym == Option.MovementKeyRIGHT){
+                D = false;
+                if (H && A)
+                    H = false;
             }
         }
     }
 }
-void GameEngine::HandleMovement(char Key, bool Press){
-    static bool W, S, A, D;
-    static bool V, H;
-    bool UpdateAnim;
-    switch (Key){
-    case 'w':
-        if (Press && !W){
-            W = true;
-            V = true;
-            UpdateAnim = true;
-            break;
-        }
-        if (!Press){
-            W = false;
-            UpdateAnim = true;
-            if (V && S)
-                V = false;
-        }
-        break;
-    case 's':
-        if (Press && !S){
-            V = false;
-            S = true;
-            UpdateAnim = true;
-            break;
-        }
-        if (!Press){
-            S = false;
-            UpdateAnim = true;
-            if (!V && W)
-                V = true;
-        }
-        break;
-    case 'd':
-        if (Press && !D){
-            H = true;
-            D = true;
-            UpdateAnim = true;
-            break;
-        }
-        if (!Press){
-            D = false;
-            UpdateAnim = true;
-            if (H && A)
-                H = false;
-        }
-        break;
-    case 'a':
-        if (Press && !A){
-            H = false;
-            A = true;
-            UpdateAnim = true;
-            break;
-        }
-        if (!Press){
-            A = false;
-            UpdateAnim = true;
-            if (!H && D)
-                H = true;
-        }
-        break;
-    default:
-        if (W && V){
-            _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().SetY((float)_Interface.GetPCs()[_Interface.ActivePC].GetAnimation().GetY() - (float).3);//Up
-        }
-        if (S && !V){
-            _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().SetY((float)_Interface.GetPCs()[_Interface.ActivePC].GetAnimation().GetY() + (float).3);//Down
-        }
-        if (A && !H){
-            _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().SetX((float)_Interface.GetPCs()[_Interface.ActivePC].GetAnimation().GetX() - (float).3);//Left
-        }
-        if (D && H){
-            _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().SetX((float)_Interface.GetPCs()[_Interface.ActivePC].GetAnimation().GetX() + (float).3);//Right
-        }
-        break;
-    }
-
-    if (UpdateAnim){
-        if (V && W){
-            if (H && D){
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Pause();
-                _Interface.GetPCs()[_Interface.ActivePC].SetAnimation(4);
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Resume(true);
-            }else if (!H && A){
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Pause();
-                _Interface.GetPCs()[_Interface.ActivePC].SetAnimation(5);
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Resume(true);
-            } else{
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Pause();
-                _Interface.GetPCs()[_Interface.ActivePC].SetAnimation(0);
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Resume(true);
-            }
-        }else if (!V && S){
-            if (H && D){
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Pause();
-                _Interface.GetPCs()[_Interface.ActivePC].SetAnimation(7);
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Resume(true);
-            }else if (!H && A){
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Pause();
-                _Interface.GetPCs()[_Interface.ActivePC].SetAnimation(6);
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Resume(true);
-            }else{
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Pause();
-                _Interface.GetPCs()[_Interface.ActivePC].SetAnimation(1);
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Resume(true);
-            }
-        }else if (H && D){
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Pause();
-            _Interface.GetPCs()[_Interface.ActivePC].SetAnimation(2);
-            _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Resume(true);
-        }else if (!H && A){
-                _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Pause();
-            _Interface.GetPCs()[_Interface.ActivePC].SetAnimation(3);
-            _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Resume(true);
-        }else
-            _Interface.GetPCs()[_Interface.ActivePC].GetAnimation().Pause();
-    }
-}
-
-

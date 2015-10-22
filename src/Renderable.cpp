@@ -10,6 +10,7 @@ Renderable::Renderable(SDL_Texture* RenderTexture, float PositionX, float Positi
     DestinationRect.x = GetIntX();
     DestinationRect.y = GetIntY();
     Texture = RenderTexture;
+	UpdateDestination();
 }
 SDL_Rect* Renderable::GetDestination(){
     DestinationRect.x = x;
@@ -17,5 +18,10 @@ SDL_Rect* Renderable::GetDestination(){
     SDL_Rect* DestPointer = new SDL_Rect(DestinationRect);
     return DestPointer;
 }
+void Renderable::UpdateDestination(){SDL_QueryTexture(Texture, NULL, NULL, &DestinationRect.w, &DestinationRect.h);}
 SDL_Texture* Renderable::GetTexture(){return Texture;}
 void Renderable::SetTexture(SDL_Texture* NewTexture){Texture = NewTexture;}
+void Renderable::SetDestinationSize(int W, int H){
+    DestinationRect.h = H;
+    DestinationRect.w = W;
+}

@@ -3,14 +3,12 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "Renderable.h"
 #include "Sprite.h"
 
 Sprite::Sprite(SDL_Texture* SpriteTexture, float PosX, float PosY) : Renderable(SpriteTexture, PosX, PosY){
 	UpdateDestination();
-
-	Orgin.x = DestinationRect.w / 2;
-	Orgin.y = DestinationRect.h / 2;
+	Origin.x = DestinationRect.w / 2;
+	Origin.y = DestinationRect.h / 2;
 	Angle = 0;
 	Scale = 1;
 	ClipingRect.x = -1;
@@ -18,24 +16,18 @@ Sprite::Sprite(SDL_Texture* SpriteTexture, float PosX, float PosY) : Renderable(
 	ClipingRect.w = -1;
 	ClipingRect.h = -1;
 }
-
-Sprite::~Sprite(){
-}
-
-inline void Sprite::UpdateDestination(){
-	SDL_QueryTexture(Texture, NULL, NULL, &DestinationRect.h, &DestinationRect.w);
-}
+Sprite::~Sprite(){}
 
 //Getters
 int Sprite::GetHeight(){return DestinationRect.h;}
 int Sprite::GetWidth(){return DestinationRect.w;}
 double Sprite::GetAngle(){return Angle;}
-SDL_Point* Sprite::GetOrgin(){
+SDL_Point* Sprite::GetOrigin(){
     SDL_Point Point;
-    Point.x = Orgin.x * Scale;
-    Point.y = Orgin.y * Scale;
-    SDL_Point* OrginPointer = new SDL_Point(Point);
-    return OrginPointer;
+    Point.x = Origin.x * Scale;
+    Point.y = Origin.y * Scale;
+    SDL_Point* OriginPointer = new SDL_Point(Point);
+    return OriginPointer;
 }
 SDL_Rect* Sprite::GetDestination(){
     DestinationRect.x = GetIntX();
@@ -58,10 +50,10 @@ SDL_Rect* Sprite::GetCliping(){
 void Sprite::SetAngle(double NewAngle){Angle = NewAngle;}
 void Sprite::ScaleScale(float ScalesScale){Scale = Scale * ScalesScale;}
 void Sprite::SetScale(float NewScale){Scale = NewScale;}
-void Sprite::SetOrgin(int OrginX, int OrginY){Orgin.x = OrginX; Orgin.y = OrginY;}
-void Sprite::SetCliping(int ClipX, int ClipY, int ClipH, int ClipW){
-	ClipingRect.x = ClipX;
-	ClipingRect.y = ClipY;
-	ClipingRect.h = ClipH;
-	ClipingRect.w = ClipW;
+void Sprite::SetOrigin(int OriginX, int OriginY){Origin.x = OriginX; Origin.y = OriginY;}
+void Sprite::SetCliping(int ClipX, int ClipY, int ClipW, int ClipH){
+    ClipingRect.x = ClipX;
+    ClipingRect.y = ClipY;
+    ClipingRect.h = ClipH;
+    ClipingRect.w = ClipW;
 }
